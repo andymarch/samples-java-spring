@@ -21,7 +21,7 @@ public class RegisterController {
     @Autowired
     private OktaAuth oktaAuth;
 
-    @GetMapping
+    @GetMapping("/register")
     public ModelAndView getRegister(){
         ModelAndView mav = new ModelAndView("register");
         mav.addObject("identifier",new RegisteringUser());

@@ -15,20 +15,21 @@
   -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User Details</title>
-    <!--/*/ <th:block th:include="head :: head"/> /*/-->
+    <title>Workflow Example</title>
+    <th:block th:include="head :: head"/>
 </head>
-  <body id="samples">
+  <body id="samples" style="background: linear-gradient(-55deg, #f2f4f8 0%, #e7eaf0 100%);">
   <div th:replace="menu :: menu"></div>
 
     <div id="content" class="container">
-      <h2>Custom Login + Spring Boot Example</h2>
+      <h2>Custom Workflow and Login Example</h2>
 
       <div th:unless="${#authorization.expression('isAuthenticated()')}">
         <p>Hello!</p>
-        <p>If you're viewing this page then you have successfully configured and started this example server.</p>
-        <p>This example shows you how to use the <a href="https://github.com/okta/okta-spring-boot">Okta Spring Boot Starter</a> to add the <a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code.html">Authorization Code Flow</a> to your application.</p>
-        <p>When you click the login button below, you will be redirected to the login page on your Okta org.  After you authenticate, you will be returned to this application.</p>
+        <p>This demonstration highlights the flexibility of the Okta cloud platform and SDK.</p>
+        <p>This example user <a href="https://github.com/okta/okta-spring-boot">Okta Spring Boot Starter</a> to add the <a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code.html">Authorization Code Flow</a> to your application.</p>
+        <p>When you click the login button below, you will prompted to login with an account on this org or with social or federated partner.</p>
+        <p>This example supports registration for new users into this Okta org. Click register below to follow an enrollment workflow.</p>
       </div>
 
       <div th:if="${#authorization.expression('isAuthenticated()')}">
@@ -37,19 +38,20 @@
           <p>We just need a little more information to get your account setup.</p>
           <form action="#" th:action="@{/updateprofile}" th:object="${registeredUser}" method="post">
             <input type="hidden" th:field="*{id}"/>
-            <p><label for="firstName">First Name</label><input id="firstName" type="text" th:field="*{firstName}"></p>
-            <p><label for="lastName">Last Name:</label><input id="lastName" type="text" th:field="*{lastName}">
+            <p><label for="firstName">First Name</label><input id="firstName" class="form-control mb-2 mr-sm-2" type="text" th:field="*{firstName}"></p>
+            <p><label for="lastName">Last Name:</label><input id="lastName" class="form-control mb-2 mr-sm-2" type="text" th:field="*{lastName}">
             <p>
               <label for="country">Country of Residence</label>
-              <select id="country" th:field="*{country}">
+              <select class="form-control" id="country" th:field="*{country}">
                 <option th:value="'United States'">United States</option>
                 <option th:value="'United Kingdom'">United Kingdom</option>
               </select>
             </p>
-            <p><label for="marketingCheck">Marketing Opt Out</label>
-              <input id="marketingCheck" type="checkbox" th:field="*{marketingOptOut}">
+            <p>
+              <input class="form-check-input" id="marketingCheck" type="checkbox" th:field="*{marketingOptOut}">
+              <label class="form-check-label" for="marketingCheck">Marketing Opt Out</label>
             </p>
-            <p><input type="submit" value="Next" /> </p>
+            <p><input type="submit" class="btn btn-primary mb-2" value="Next" /> </p>
           </form>
         </div>
         <div th:if="${registeredUser.isProfileComplete()}">

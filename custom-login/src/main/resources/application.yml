@@ -12,3 +12,7 @@ security:
     client:
       # Redirect to your local page and render the widget
       userAuthorizationUri: http://localhost:${server.port}/login
+
+spring:
+  resources:
+    static-locations: classpath:/resources/,classpath:/resources/static/,classpath:/resources/static/css/

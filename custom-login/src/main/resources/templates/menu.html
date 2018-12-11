@@ -16,11 +16,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body id="samples">
-
-    <nav class="navbar navbar-default"  th:fragment="menu">
+    <nav class="jumbotron" style="background: linear-gradient(#01447a, #003865);" th:fragment="menu">
+        <div class="navbar-header">
+        <a class="navbar-brand" href="#" style="color: white; font-family: 'Permanent Marker', cursive; font-size: xx-large">Examply.co.uk</a>
+        </div>
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-            <li><a th:href="@{/}">Home</a></li>
             <li><a id="profile-button" th:href="@{/profile}" th:if="${#authorization.expression('isAuthenticated()')}">My Profile</a></li>
         </ul>
         <form method="post" th:action="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}" class="navbar-form navbar-right">
@@ -29,6 +30,5 @@
         </form>
       </div>
     </nav>
-
 </body>
 </html>
