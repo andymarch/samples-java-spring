@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:include="head :: head"/>
+</head>
+<body>
+This is the registration workflow. Stage <span th:text="${identifier.getWorkflowStage().name()}"/>
+
+<th:block th:if="${identifier.workflowStage == T(com.okta.spring.example.models.RegisteringUser.WorkflowStage).prereg}">
+    <h4>Welcome</h4>
+    <p>Let's see if you already have an account with us.</p>
+    <form action="#" th:action="@{/register}" th:object="${identifier}" method="post">
+        <p><input required="required" type="text" th:field="*{userIdentifier}" placeholder="email, phone"/></p>
+        <p><input type="submit" value="Next" /> </p>
+    </form>
+</th:block>
+
+
+<th:block th:if="${identifier.workflowStage == T(com.okta.spring.example.models.RegisteringUser.WorkflowStage).enroll}">
+    <h4>Choose a password</h4>
+    <p>Create a password for your new account</p>
+    <form action="#" th:action="@{/register}" th:object="${identifier}" method="post">
+        <input type="hidden" th:field="*{workflowStage}"/>
+        <input type="hidden" th:field="*{userIdentifier}" placeholder="email, phone"/>
+        <th:block th:if="${identifier.email == null}">
+            <p><input id="contactSet" type="email" th:field="*{email}" placeholder="contact email"></p>
+        </th:block>
+        <th:block th:if="${identifier.email != null}">
+            <p><input id="contactShow" type="email" th:field="*{email}" placeholder="contact email"></p>
+        </th:block>
+        <p><input id="password" th:field="*{password}" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" required></p>
+        <p><input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" required></p>
+        <p><input type="submit" value="Next" /> </p>
+    </form>
+</th:block>
+
+<th:block th:if="${identifier.workflowStage == T(com.okta.spring.example.models.RegisteringUser.WorkflowStage).verify}">
+    <h4>Verify your email address</h4>
+    <p>Please check you email at <b th:text="${identifier.email}"></b> for a verification code. Once you have received it please enter it below.</p>
+    <form action="#" th:action="@{/register}" th:object="${identifier}" method="post">
+        <input type="hidden" th:field="*{workflowStage}"/>
+        <input type="hidden" th:field="*{userIdentifier}"/>
+        <input type="text" th:field="*{verificationCode}">
+        <p><input type="submit" value="Next" /> </p>
+    </form>
+</th:block>
+<th:block th:if="${identifier.workflowStage == T(com.okta.spring.example.models.RegisteringUser.WorkflowStage).welcome}">
+    <h4>Account Created</h4>
+    <p>Your account has been created.</p>
+    <a href="/login">Please login</a>
+</th:block>
+</body>
+</html>

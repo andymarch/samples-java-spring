@@ -32,14 +32,37 @@
       </div>
 
       <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <p>Welcome back, <span th:text="${#authentication.name}">Joe Coder</span>!</p>
-        <p>You have successfully authenticated against your Okta org, and have been redirected back to this application.</p>
-        <p>Visit the <a th:href="@{/profile}">My Profile</a> page in this application to view the information retrieved with your OAuth Access Token.</p>
+        <div th:if="${!registeredUser.isProfileComplete()}">
+          <h4>Complete Account</h4>
+          <p>We just need a little more information to get your account setup.</p>
+          <form action="#" th:action="@{/updateprofile}" th:object="${registeredUser}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <p><label for="firstName">First Name</label><input id="firstName" type="text" th:field="*{firstName}"></p>
+            <p><label for="lastName">Last Name:</label><input id="lastName" type="text" th:field="*{lastName}">
+            <p>
+              <label for="country">Country of Residence</label>
+              <select id="country" th:field="*{country}">
+                <option th:value="'United States'">United States</option>
+                <option th:value="'United Kingdom'">United Kingdom</option>
+              </select>
+            </p>
+            <p><label for="marketingCheck">Marketing Opt Out</label>
+              <input id="marketingCheck" type="checkbox" th:field="*{marketingOptOut}">
+            </p>
+            <p><input type="submit" value="Next" /> </p>
+          </form>
+        </div>
+        <div th:if="${registeredUser.isProfileComplete()}">
+          <p>Welcome back, <span th:text="${#authentication.name}">Joe Coder</span>!</p>
+          <p>You have successfully authenticated against your Okta org, and have been redirected back to this application.</p>
+          <p>Visit the <a th:href="@{/profile}">My Profile</a> page in this application to view the information retrieved with your OAuth Access Token.</p>
+        </div>
       </div>
 
-        <form method="get" th:action="@{/authorization-code/callback}" th:unless="${#authorization.expression('isAuthenticated()')}">
-          <button id="login-button" class="btn btn-primary" type="submit">Login</button>
-        </form>
+      <form method="get" th:action="@{/authorization-code/callback}" th:unless="${#authorization.expression('isAuthenticated()')}">
+        <button id="login-button" class="btn btn-primary" type="submit">Login</button>
+        <a href="/register"> or register</a>
+      </form>
     </div>
   </body>
 </html>

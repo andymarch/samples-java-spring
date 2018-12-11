@@ -18,37 +18,61 @@
     <title>Login</title>
     <!--/*/ <th:block th:include="head :: head"/> /*/-->
 
-    <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.9.0/js/okta-sign-in.min.js" type="text/javascript"></script>
     <link href="/css/okta.css" rel="stylesheet" type="text/css"/>
-    <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.9.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
-    <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.9.0/css/okta-theme.css" type="text/css" rel="stylesheet"/>
 
+    <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.6.0/okta-auth-js.min.js" type="text/javascript"></script>
 </head>
 <body class="login">
-  <div id="sign-in-widget"></div>
+<div id="sign-in-widget"></div>
+
+<h2>Login</h2>
+<form class="form-inline" onsubmit="doIt()">
+    <label class="sr-only" for="email">Email</label>
+    <input type="text" class="form-control mb-2 mr-sm-2" id="email" placeholder="email">
+
+    <label class="sr-only" for="email">Password</label>
+    <input type="password" class="form-control mb-2 mr-sm-2" id="password" placeholder="password">
+
+</form>
+
+<input type="button" class="btn btn-primary mb-2" onclick="javascript:doIt()" value="Submit">
+<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+<p><a href="https://examply.okta-emea.com/oauth2/v1/authorize?idp=0oa2bun0xsg66oORh0i7&client_id=0oa2duag5mLTtT6ud0i7&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fauthorization-code%2Fcallback&state=WM6D&nonce=YsG76jo">Login With Facebook</a></p>
 
 <script th:inline="javascript">
-/*<![CDATA[*/
+    /*<![CDATA[*/
 
-var config = {};
+    var config = {};
 
-config.baseUrl = /*[[${oktaBaseUrl}]]*/ 'https://{yourOktaDomain}';
-config.clientId = /*[[${oktaClientId}]]*/ '{oktaClientId}';
-config.redirectUri = /*[[${redirectUri}]]*/ '{redirectUri}';
-config.logo = 'https://spring.io/img/homepage/icon-spring-cloud.svg';
-config.authParams = {
-  issuer: /*[[${issuerUri}]]*/ '{issuerUri}',
-  responseType: 'code',
-  state: /*[[${state}]]*/ '{state}' || false,
-  scopes: /*[[${scopes}]]*/ '[scopes]',
-  display: 'page'
-};
+    config.url = /*[[${oktaBaseUrl}]]*/ 'https://{yourOktaDomain}';
+    config.clientId = /*[[${oktaClientId}]]*/ '{oktaClientId}';
+    config.redirectUri = /*[[${redirectUri}]]*/ '{redirectUri}';
+    config.logo = 'https://spring.io/img/homepage/icon-spring-cloud.svg';
+    config.issuer = /*[[${issuerUri}]]*/ '{issuerUri}';
+    config.authParams = {
+        responseType: 'code',
+        state: /*[[${state}]]*/ '{state}' || false,
+        scopes: /*[[${scopes}]]*/ '[scopes]',
+        display: 'page',
+        responseMode: 'query'
+    };
 
-new OktaSignIn(config).renderEl(
-  { el: '#sign-in-widget' },
-  function (res) {}
-);
-/*]]>*/
+    var authClient = new OktaAuth(config);
+    function doIt() {
+        authClient.signIn({
+            username: document.getElementById("email").value,
+            password: document.getElementById("password").value
+        })
+            .then(function (transaction) {
+                console.log(transaction.sessionToken)
+                if (transaction.status === 'SUCCESS') {
+                    config.authParams.sessionToken = transaction.sessionToken
+                        authClient.token.getWithRedirect(config.authParams)
+                }
+            })
+    }
+
+    /*]]>*/
 </script>
 
 </body>

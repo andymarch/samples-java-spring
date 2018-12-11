@@ -83,6 +83,35 @@
             <scope>runtime</scope>
         </dependency>
 
+		<dependency>
+			<groupId>com.okta.sdk</groupId>
+			<artifactId>okta-sdk-api</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.okta.sdk</groupId>
+			<artifactId>okta-sdk-impl</artifactId>
+			<version>1.3.0</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.okta.sdk</groupId>
+			<artifactId>okta-sdk-httpclient</artifactId>
+			<version>1.3.0</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.okta.authn.sdk</groupId>
+			<artifactId>okta-authn-sdk-api</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.okta.authn.sdk</groupId>
+			<artifactId>okta-authn-sdk-impl</artifactId>
+			<version>0.2.0</version>
+			<scope>runtime</scope>
+		</dependency>
+
         <!-- Logging -->
         <dependency>
             <!-- Required for any libraries that expect to call the commons logging APIs -->
