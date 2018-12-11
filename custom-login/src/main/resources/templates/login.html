@@ -19,26 +19,42 @@
     <!--/*/ <th:block th:include="head :: head"/> /*/-->
 
     <link href="/css/okta.css" rel="stylesheet" type="text/css"/>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.6.0/okta-auth-js.min.js" type="text/javascript"></script>
 </head>
 <body class="login">
 <div id="sign-in-widget"></div>
 
 <h2>Login</h2>
-<form class="form-inline" onsubmit="doIt()">
-    <label class="sr-only" for="email">Email</label>
-    <input type="text" class="form-control mb-2 mr-sm-2" id="email" placeholder="email">
+<div id="localAndSocial">
+    <form class="form-inline" onsubmit="doIt()">
+        <label class="sr-only" for="email">Email</label>
+        <input type="text" class="form-control mb-2 mr-sm-2" id="email" placeholder="email">
 
-    <label class="sr-only" for="email">Password</label>
-    <input type="password" class="form-control mb-2 mr-sm-2" id="password" placeholder="password">
+        <label class="sr-only" for="email">Password</label>
+        <input type="password" class="form-control mb-2 mr-sm-2" id="password" placeholder="password">
 
-</form>
+    </form>
 
-<input type="button" class="btn btn-primary mb-2" onclick="javascript:doIt()" value="Submit">
-<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-<p><a href="#" onclick="doIt('0oa2bun0xsg66oORh0i7')">Login With Facebook</a></p>
-<p><a href="#" onclick="doIt('0oa2dzml18GWcrc9L0i7')">Login With University</a></p>
+    <input type="button" class="btn btn-primary mb-2" onclick="javascript:doIt()" value="Submit">
+    <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <p><a href="#" onclick="doIt('0oa2bun0xsg66oORh0i7')">Login With Facebook</a></p>
+    <p><a href="#" onclick="doIt('0oa2eaoa6qdmnZkCb0i7')">Login With LinkedIn</a></p>
+    <p><a href="#" onclick="institutionLogin()">Login with your institution</a></p>
+</div>
+
+<div id="institution" style="display: none">
+    <div style="overflow-y: scroll; height: 100px; width:250px">
+        <p><a href="#" onclick="doIt('0oa2dzml18GWcrc9L0i7')">Login With University</a></p>
+        <p><a href="#" onclick="doIt('0oa2ea6nom7oWY4c10i7')">Login With University 2</a></p>
+        <p><a href="#" onclick="">Stub 1</a></p>
+        <p><a href="#" onclick="">Stub 2</a></p>
+        <p><a href="#" onclick="">Stub 3</a></p>
+        <p><a href="#" onclick="">Stub 4</a></p>
+        <p><a href="#" onclick="">Stub 5</a></p>
+    </div>
+    <p><a href="#" onclick="institutionLogin()">Login with local or social account</a></p>
+</div>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -77,6 +93,11 @@
                     }
                 })
         }
+    }
+
+    function institutionLogin(){
+        $("#localAndSocial").toggle();
+        $("#institution").toggle();
     }
 
     /*]]>*/
