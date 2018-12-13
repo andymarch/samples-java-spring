@@ -20,6 +20,8 @@ public class RegisterController {
     private OktaAdmin oktaAdmin;
     @Autowired
     private OktaAuth oktaAuth;
+    @Autowired
+    private WorkflowAuthenticationStateHandler stateHandler;
 
     @GetMapping("/register")
     public ModelAndView getRegister(){
@@ -52,6 +54,7 @@ public class RegisterController {
                 reg.setUser(oktaAdmin.registerUser(user));
                 reg.setEmailFactor(oktaAdmin.EnrollEmail(user, reg.getUser()));
                 reg.setPassword(user.getPassword());
+                oktaAuth.authenticate(reg.getUser().getId(),reg.getPassword(),"",stateHandler);
                 user.setWorkflowStage(RegisteringUser.WorkflowStage.verify);
                 break;
             case verify:

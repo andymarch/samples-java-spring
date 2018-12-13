@@ -116,7 +116,6 @@ public class HostedLoginCodeFlowExampleApplication {
                 .exceptionHandling()
                     .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(oktaOAuth2Properties.getRedirectUri()))
                     .accessDeniedHandler((req, res, e) -> res.sendRedirect("/403"))
-
                 // allow anonymous users to access the root page
                 .and()
                     .authorizeRequests()
