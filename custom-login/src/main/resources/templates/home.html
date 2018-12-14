@@ -26,10 +26,10 @@
 
       <div th:unless="${#authorization.expression('isAuthenticated()')}">
         <p>Hello!</p>
-        <p>This demonstration highlights the flexibility of the Okta cloud platform and SDK.</p>
-        <p>This example user <a href="https://github.com/okta/okta-spring-boot">Okta Spring Boot Starter</a> to add the <a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code.html">Authorization Code Flow</a> to your application.</p>
-        <p>When you click the login button below, you will prompted to login with an account on this org or with social or federated partner.</p>
-        <p>This example supports registration for new users into this Okta org. Click register below to follow an enrollment workflow.</p>
+        <p>Welcome to Cengage Prototype Portal.</p>
+        <p>You will see a few flows at this portal. For instance if you already have an account with us, please select Login</p>
+        <p>You could also choose to create an account by clicking Register</p>
+        <p>If you would like to login with Facebook please select Login with Facebook on Registartion Page</p>
       </div>
 
       <div th:if="${#authorization.expression('isAuthenticated()')}">
@@ -56,8 +56,8 @@
         </div>
         <div th:if="${registeredUser.isProfileComplete()}">
           <p>Welcome back, <span th:text="${#authentication.name}">Joe Coder</span>!</p>
-          <p>You have successfully authenticated against your Okta org, and have been redirected back to this application.</p>
-          <p>Visit the <a th:href="@{/profile}">My Profile</a> page in this application to view the information retrieved with your OAuth Access Token.</p>
+          <p>You have successfully logged into to Cengage Prototype Portal. I am the app landing page I can be customized for your best experience.</p>
+          <p>Visit the <a th:href="@{/profile}">My Profile</a> page on the top left corner to view the information retrieved with your OAuth Access Token.</p>
         </div>
       </div>
 

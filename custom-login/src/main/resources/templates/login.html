@@ -18,8 +18,43 @@
     <title>Login</title>
     <!--/*/ <th:block th:include="head :: head"/> /*/-->
 
-    <link th:href="@{/css/okta.css}" rel="stylesheet" type="text/css"/>
-    <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.6.0/okta-auth-js.min.js" type="text/javascript"></script>
+   <link href="/css/okta.css" rel="stylesheet" type="text/css"/>
+
+   <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.6.0/okta-auth-js.min.js" type="text/javascript"></script>
+   <style>
+   .fb-button {
+   height: 33px; 
+   width: 172px;   
+   background-image:url('https://i.ibb.co/wsNhM4k/LoginFb.png');
+   background-repeat:no-repeat;
+   }
+   </style>
+   <style>
+   .ld-button {
+       height: 33px;
+       width: 172px;
+       background-image:url('https://i.ibb.co/j6w9RBz/Login-Lnk-In.png');
+       background-repeat:no-repeat;
+   }
+   </style>
+   <style>
+   .gg-button {
+       height: 33px;
+       width: 172px;
+       background-image:url('https://i.ibb.co/wYDRx46/loginG.png');
+       background-repeat:no-repeat;
+   }
+   </style>
+   <style>
+   .univ-button {
+       height: 33px;
+       width: 172px;
+       background: linear-gradient(#01447a, #003865);
+       color: white;
+       font-size: smaller;
+   }
+   </style>
+   
 </head>
 <body class="login" style="background: linear-gradient(-55deg, #f2f4f8 0%, #e7eaf0 100%);">
 <div th:replace="menu :: menu"></div>
@@ -47,9 +82,13 @@
         </div>
         <div><p>or</p></div>
         <div>
-            <p><a href="#" onclick="doIt('0oa2bun0xsg66oORh0i7')"><img src="//logo.clearbit.com/facebook.com/?size=30"/>Login With Facebook</a></p>
-            <p><a href="#" onclick="doIt('0oa2eaoa6qdmnZkCb0i7')"><img src="//logo.clearbit.com/linkedin.com/?size=30"/>Login With LinkedIn</a></p>
-            <p><a href="#" onclick="institutionLogin()">Login with your institution</a></p>
+            <p>
+                <input type="button" class="fb-button" onclick="javascript:doIt('0oa2bun0xsg66oORh0i7')" value="">
+                <input type="button" class="ld-button" onclick="javascript:doIt('0oa2eaoa6qdmnZkCb0i7')" value="">
+            </p>
+            <p><input type="button" class="gg-button" onclick="javascript:doIt('0oa2eg3rw1L4RQapl0i7')" value="">
+                <input type="button" class="univ-button" onclick="institutionLogin()" value="Login with institution">
+            </p>
         </div>
     </div>
 

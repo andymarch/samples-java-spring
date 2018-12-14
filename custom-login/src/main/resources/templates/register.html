@@ -47,7 +47,7 @@
         </form>
     </th:block>
     <th:block th:if="${identifier.workflowStage == T(com.okta.spring.example.models.RegisteringUser.WorkflowStage).welcome}">
-        <h2>Account Created</h2>
+        <h2>Welcome to Cengage</h2>
         <p>Your account has been successfully created. Please login to complete your profile.</p>
         <form action="/login">
             <input class="btn btn-primary mb-2" type="submit" value="Login" />
