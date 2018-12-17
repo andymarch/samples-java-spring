@@ -5,9 +5,9 @@
     <title>Register Account</title>
     <th:block th:include="head :: head"/>
 </head>
-<body style="background: linear-gradient(-55deg, #f2f4f8 0%, #e7eaf0 100%);">
+<body>
 <div th:replace="menu :: menu"></div>
-<div id="content" class="container">
+<div id="content" class="container  text-center">
     <th:block th:if="${identifier.workflowStage == T(com.okta.spring.example.models.RegisteringUser.WorkflowStage).prereg}">
         <h2>Welcome</h2>
         <p>Let's see if you already have an account with us.</p>

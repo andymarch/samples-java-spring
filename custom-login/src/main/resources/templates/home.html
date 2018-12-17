@@ -18,10 +18,10 @@
     <title>Workflow Example</title>
     <th:block th:include="head :: head"/>
 </head>
-  <body id="samples" style="background: linear-gradient(-55deg, #f2f4f8 0%, #e7eaf0 100%);">
+  <body>
   <div th:replace="menu :: menu"></div>
 
-    <div id="content" class="container">
+    <div id="content" class="container text-center">
       <h2>Custom Workflow and Login Example</h2>
 
       <div th:unless="${#authorization.expression('isAuthenticated()')}">

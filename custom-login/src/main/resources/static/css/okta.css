@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-body.login {
-    background-color: #f9f9f9;
+body {
+    background: linear-gradient(-55deg, #f2f4f8 0%, #e7eaf0 100%);
+}
+
+nav.jumbotron {
+    background: linear-gradient(#01447a, #003865);
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 #okta-sign-in {
@@ -27,4 +33,53 @@ body.login {
     text-align: center;
     width: 100%;
 }
-.navbar-brand {float:none;}
+.brand {
+    color: white;
+    font-family: 'Permanent Marker', cursive;
+    font-size: xx-large;
+    text-decoration: none
+}
+
+.brand:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.social-btn {
+    height: 40px;
+    width: 200px;
+    color: white;
+    font-size: smaller;
+    background-repeat: no-repeat;
+    background-size:cover;
+    margin-bottom: 10px;
+}
+
+.facebook-btn {
+    background-image: url(/img/facebook.png);
+    background-size: contain;
+    background-position: center;
+}
+
+.linkedin-btn {
+    background-image: url(/img/linkedin.png);
+}
+
+.google-btn {
+   background-image:url(/img/google.png);
+}
+
+.institution-btn {
+    color: white;
+    background: linear-gradient(#01447a, #003865)
+}
+
+#institutionPicker{
+    overflow-y: scroll;
+    height: 450px;
+    width:600px;
+    margin-bottom: 40px;
+}
+#institution {
+    margin-bottom: 20px;
+}

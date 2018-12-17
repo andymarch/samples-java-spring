@@ -120,7 +120,7 @@ public class HostedLoginCodeFlowExampleApplication {
                 // allow anonymous users to access the root page
                 .and()
                     .authorizeRequests()
-                        .antMatchers("/", "/login", "/css/**", "/register").permitAll()
+                        .antMatchers("/", "/login", "/css/**", "/img/**", "/register").permitAll()
                         .antMatchers("/**").authenticated()
 
                 // send the user back to the root page when they logout
