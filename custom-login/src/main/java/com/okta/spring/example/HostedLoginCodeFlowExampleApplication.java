@@ -122,10 +122,7 @@ public class HostedLoginCodeFlowExampleApplication {
                     .authorizeRequests()
                         .antMatchers("/", "/login", "/css/**", "/img/**", "/register").permitAll()
                         .antMatchers("/**").authenticated()
-
-                // send the user back to the root page when they logout
-                .and()
-                    .logout().logoutSuccessUrl("/");
+            ;
         }
     }
 }
